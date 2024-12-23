@@ -24,11 +24,11 @@ The clock runs smoothly and rotates continuously without reversing or resetting 
 
 1. Clone the repository to your local machine:
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
+   git clone https://github.com/Abishekkavuri/Analog-Digital-Clock-Project.git
    ```
 2. Navigate to the project folder:
    ```bash
-   cd your-repo-name
+   cd Analog-Digital-Clock-Project
    ```
 3. Open `index.html` in your browser to view the clock.
 
@@ -38,12 +38,14 @@ The clock runs smoothly and rotates continuously without reversing or resetting 
 
 ### Clock Overview
 
-![Clock Overview](./images/Screenshot%202024-12-23%20131946.png)
+![Screenshot 2024-12-23 131946](https://github.com/user-attachments/assets/60aac37d-f296-44e1-b5e2-4da98b416af5)
+
 *Figure 1: Clock displaying the current time.*
 
 ### Stacked Numbers
 
-![Stacked Numbers](./images/Screenshot%202024-12-23%20132003.png)
+![Screenshot 2024-12-23 132003](https://github.com/user-attachments/assets/4b390d4e-19b4-40d9-8589-f295b9ce8d1e)
+
 *Figure 2: Close-up of the stacked numbers.*
 
 ---
@@ -78,16 +80,11 @@ Contributions are welcome! If you’d like to improve this project, please:
 
 ---
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
 
 ## Contact
 
 For any questions or suggestions, feel free to reach out:
 
-- **Email**: [your-email@example.com](mailto:your-email@example.com)
-- **GitHub**: [your-username](https://github.com/your-username)
+- **Email**: [mailtoabisheka@gmail.com](mailto:mailtoabisheka@gmail.com)
+- **GitHub**: [Abisheka kavuri](https://github.com/Abishekkavuri?tab=repositories)
 
