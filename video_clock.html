@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Continuous Clockwise Clock</title>
+    <title>3D Clock with Number Stack</title>
     <style>
         body {
             display: flex;
@@ -24,8 +24,8 @@
             align-items: center;
             border-radius: 50%;
             background: radial-gradient(circle, #4c6ef5, #2c3e50);
-            border: 10px solid #1a2537;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 0, 0, 0.2);
+            border: 10px solid #1a2537; /* Outer border */
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
         }
 
         .pointer {
@@ -34,9 +34,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            transform-origin: 50% 100%;
-            transform: translate(-50%, -50%);
-            transition: transform 1s linear;
+            transform-origin: 50% 100%; /* Pivot at the bottom center */
+            transform: translate(-50%, -50%); /* Center the pointer */
+            transition: transform 1s ease-in-out;
         }
 
         .pointer span {
@@ -50,6 +50,7 @@
         .hour, .minute, .second {
             position: absolute;
             transform: translate(-50%, -50%);
+            transition: transform 0.5s ease-in-out;
         }
 
         .hour {
@@ -80,39 +81,48 @@
     </div>
 
     <script>
-        let totalSeconds = 0; // Keeps track of total seconds since the clock started
-
         function updateClock() {
             const now = new Date();
-            const hours = now.getHours() % 12 || 12; // Ensure 12-hour format
+            const hours = now.getHours() % 12 || 12; // 12-hour format
             const minutes = now.getMinutes();
             const seconds = now.getSeconds();
 
-            // Accumulate total seconds for continuous rotation
-            totalSeconds++;
-
             // Update hour pointer
-            updatePointer('hourPointer', hours, 3, hours * 30);
+            updatePointer('hourPointer', hours, 3);
 
             // Update minute pointer
-            updatePointer('minutePointer', minutes, 5, minutes * 6);
+            updatePointer('minutePointer', minutes, 5);
 
             // Update second pointer
-            updatePointer('secondPointer', seconds, 7, totalSeconds * 6); // Use total seconds for continuous rotation
+            updatePointer('secondPointer', seconds, 7, true);  // Added the `clockwise` flag
         }
 
-        function updatePointer(pointerId, value, stackLength, rotationDegree) {
+        function updatePointer(pointerId, value, stackLength, clockwise = false) {
             const pointer = document.getElementById(pointerId);
             pointer.innerHTML = ''; // Clear previous stack
 
-            // Add the appropriate number of items to the stack
+            // Add the appropriate number of items to the stack based on the length
             for (let i = 0; i < stackLength; i++) {
                 const number = document.createElement('span');
                 number.textContent = value;
                 pointer.appendChild(number);
             }
 
-            // Apply the rotation and keep pointers centered
+            // Calculate rotation based on the value
+            let rotationDegree = 0;
+            if (pointerId === 'hourPointer') {
+                rotationDegree = (value % 12) * 30; // 360 degrees / 12 hours
+            } else if (pointerId === 'minutePointer') {
+                rotationDegree = (value % 60) * 6; // 360 degrees / 60 minutes
+            } else if (pointerId === 'secondPointer') {
+                rotationDegree = (value % 60) * 6; // 360 degrees / 60 seconds
+                // Ensure second pointer moves only clockwise, no backward movement
+                if (rotationDegree === 0 && value !== 0) {
+                    rotationDegree = 360;  // Force the rotation back to 360 degrees to keep moving clockwise
+                }
+            }
+
+            // Apply the rotation and keep pointers in the center
             pointer.style.transform = `translate(-50%, -50%) rotate(${rotationDegree}deg)`;
         }
 
